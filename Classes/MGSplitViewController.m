@@ -492,6 +492,12 @@
 }
 
 
+- (void)viewWillLayoutSubviews
+{
+    [self layoutSubviews];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
@@ -502,7 +508,7 @@
 	[self.detailViewController viewWillAppear:animated];
 	
 	_reconfigurePopup = YES;
-	[self layoutSubviews];
+	[self.view setNeedsLayout];
 }
 
 
@@ -688,7 +694,7 @@
 		// We're about to show the master view. Ensure it's in place off-screen to be animated in.
 		_reconfigurePopup = YES;
 		[self reconfigureForMasterInPopover:NO];
-		[self layoutSubviews];
+		[self.view setNeedsLayout];
 	}
 	
 	// This action functions on the current primary orientation; it is independent of the other primary orientation.
@@ -755,7 +761,7 @@
 			
 			// Rearrange views.
 			_reconfigurePopup = YES;
-			[self layoutSubviews];
+			[self.view setNeedsLayout];
 		}
 	}
 }
@@ -779,7 +785,7 @@
 			
 			// Rearrange views.
 			_reconfigurePopup = YES;
-			[self layoutSubviews];
+			[self.view setNeedsLayout];
 		}
 	}
 }
@@ -805,7 +811,7 @@
 			[_delegate splitViewController:self willChangeSplitOrientationToVertical:_vertical];
 		}
 		
-		[self layoutSubviews];
+		[self.view setNeedsLayout];
 	}
 }
 
@@ -826,7 +832,7 @@
 		_masterBeforeDetail = flag;
 		
 		if ([self isShowingMaster]) {
-			[self layoutSubviews];
+			[self.view setNeedsLayout];
 		}
 	}
 }
@@ -868,7 +874,7 @@
 		}
 		
 		if ([self isShowingMaster]) {
-			[self layoutSubviews];
+			[self.view setNeedsLayout];
 		}
 	}
 }
@@ -898,7 +904,7 @@
 	if (width != _splitWidth && width >= 0) {
 		_splitWidth = width;
 		if ([self isShowingMaster]) {
-			[self layoutSubviews];
+			[self.view setNeedsLayout];
 		}
 	}
 }
@@ -927,7 +933,7 @@
 			NSLog(@"Error: %@ requires 2 view-controllers. (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 		}
 		
-		[self layoutSubviews];
+		[self.view setNeedsLayout];
 	}
 }
 
@@ -969,7 +975,7 @@
 	}
 	
 	if (changed) {
-		[self layoutSubviews];
+		[self.view setNeedsLayout];
 	}
 }
 
@@ -1007,7 +1013,7 @@
 	}
 	
 	if (changed) {
-		[self layoutSubviews];
+		[self.view setNeedsLayout];
 	}
 }
 
@@ -1027,7 +1033,7 @@
 		_dividerView.splitViewController = self;
 		_dividerView.backgroundColor = MG_DEFAULT_CORNER_COLOR;
 		if ([self isShowingMaster]) {
-			[self layoutSubviews];
+			[self.view setNeedsLayout];
 		}
 	}
 }
@@ -1089,7 +1095,7 @@
 	}
 	
 	// Layout all views.
-	[self layoutSubviews];
+	[self.view setNeedsLayout];
 }
 
 
